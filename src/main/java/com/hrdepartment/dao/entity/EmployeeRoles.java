@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,13 +11,19 @@ import java.io.Serializable;
 @Setter
 @Entity
 public class EmployeeRoles extends BaseEntity {
+    @Column
+    private Integer roleId;
+
+    @Column
+    private Integer employeeId;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleId", referencedColumnName = "id")
+    @JoinColumn(name = "roleId", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private Roles role;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "employeeId", referencedColumnName = "id")
+    @JoinColumn(name = "employeeId", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private Employees employee;
 }

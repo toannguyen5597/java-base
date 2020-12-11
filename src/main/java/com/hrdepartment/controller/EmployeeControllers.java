@@ -2,18 +2,14 @@ package com.hrdepartment.controller;
 
 import com.hrdepartment.dao.entity.Employees;
 import com.hrdepartment.dao.service.EmployeeService;
+import com.hrdepartment.response.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("employees")
-public class EmployeeControllers {
+public class EmployeeControllers extends BaseController {
 
     private final EmployeeService employeeService;
 
@@ -22,17 +18,17 @@ public class EmployeeControllers {
     }
 
     @GetMapping()
-    public Object getAll() {
+    public BaseResponse getAll() {
         log.info("(getAll)");
 
-        return employeeService.findAll();
+        return super.responseSuccess(employeeService.findAll());
     }
 
     @PostMapping()
-    public Boolean save(Employees employees) {
-        log.info("(save) employees {}", employees);
+    public BaseResponse save(Employees body) {
+        log.info("(save) body {}", body);
 
-        employeeService.save(employees);
-        return true;
+        employeeService.save(body);
+        return super.responseSuccess(true);
     }
 }
