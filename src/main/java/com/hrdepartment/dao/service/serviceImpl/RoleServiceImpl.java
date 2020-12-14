@@ -6,6 +6,8 @@ import com.hrdepartment.dao.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<Roles, Integer> implements RoleService {
@@ -15,5 +17,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Roles, Integer> implements 
     public RoleServiceImpl(RoleRepository roleRepository) {
         super(roleRepository);
         this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public List<Roles> findAll() {
+        return roleRepository.findAll();
     }
 }

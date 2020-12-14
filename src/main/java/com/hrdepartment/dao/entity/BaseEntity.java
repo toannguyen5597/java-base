@@ -18,16 +18,18 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column @CreationTimestamp
+    @Column
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column @UpdateTimestamp
+    @Column
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @Column(columnDefinition = "DATETIME DEFAULT null")
     private LocalDateTime deletedAt;
 
-    public BaseEntity(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt){
+    public BaseEntity(Integer id, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
